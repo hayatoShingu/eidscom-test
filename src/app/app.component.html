@@ -1,0 +1,38 @@
+<app-spinner [isLoading]="isLoading">
+</app-spinner>
+
+<mat-toolbar class="app-toolbar">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-menu-item routerLink="search">
+      <mat-icon>search</mat-icon>
+      <span>Search</span>
+    </button>
+  </mat-menu>
+
+  <span class="spacer"></span>
+
+  <span>Ediscom Forum Test</span>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item>
+      Loged as: {{user.username}}
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
+
+<div class="app-content">
+  <router-outlet class="main-content"></router-outlet>
+</div>

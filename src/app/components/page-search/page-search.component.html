@@ -1,0 +1,51 @@
+<p style="text-align:center">
+    <mat-label>Filters </mat-label>
+    <mat-slide-toggle [(ngModel)]="freeSearch" (ngModelChange)="toggleChange()"></mat-slide-toggle>
+    <mat-label> Free Search</mat-label>
+</p>
+
+<form class="search-form" [ngSwitch]=freeSearch>
+    <!-- <mat-form-field class="input-full-width">
+        <mat-label>Search for all post of specific Useer</mat-label>
+        <input matInput placeholder="Username" value="">
+    </mat-form-field> -->
+
+    <mat-form-field appearance="fill" class="input-full-width" *ngSwitchCase="false">
+        <mat-label>Search for all post of specific Useer</mat-label>
+        <mat-select name="userId" (selectionChange)="searchForField($event, 'userId')">
+            <mat-option *ngFor="let user of usersList" [value]="user.id">
+                {{user.username}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-full-width" *ngSwitchCase="true">
+        <mat-label>Search text</mat-label>
+        <input matInput placeholder="write here the text" name="search-text" [(ngModel)]="searchText" />
+        <button mat-button matSuffix (click)="doFreeSearch(searchText, $event)"
+            [disabled]="(searchText.length > 0) ? false : true">Search</button>
+
+    </mat-form-field>
+
+
+
+</form>
+
+<div>
+    <mat-card class="post" *ngFor="let post of postsList">
+        <!-- {{post.title}} -->
+        <mat-card-header>
+            <mat-card-title>{{post.title}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p>
+                {{post.body}}
+            </p>
+        </mat-card-content>
+
+        <span class="spacer"></span>
+
+    </mat-card>
+
+</div>
